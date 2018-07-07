@@ -1,0 +1,2 @@
+---
+- debug: msg="System {{ source_dir }} _____{{ inventory_hostname }} has uuid {{ ansible_product_uuid }}, nodename {{ ansible_nodename }}"

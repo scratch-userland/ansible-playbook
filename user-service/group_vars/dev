@@ -1,0 +1,6 @@
+---
+config_name: user-service-dev
+git_deploy_version: dev
+uwsgi_port_user_service: 19997
+uwsgi_env: dev
+redis_bind_interface: 127.0.0.1

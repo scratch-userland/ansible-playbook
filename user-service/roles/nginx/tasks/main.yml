@@ -1,0 +1,8 @@
+---
+- name: Copy nginx config
+  template: |
+    src=apps_nginx.conf dest=/etc/nginx/sites-enabled/{{ config_name }}.conf
+    owner=root group=root
+
+- name: Reload nginx
+  service: name=nginx state=reloaded

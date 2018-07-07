@@ -1,0 +1,12 @@
+---
+- name: install user-service project
+  hosts: all
+  user: user-service
+  sudo: yes
+
+  roles:
+      - source_code
+      - debug
+      - nginx
+      - apps
+      #- { role: redis, when: " not {{ is_node }}" }
