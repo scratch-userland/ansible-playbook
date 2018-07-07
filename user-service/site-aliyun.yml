@@ -9,4 +9,4 @@
       - debug
       - nginx
       - apps
-      #- { role: redis, when: " not {{ is_node }}" }
+      - redis

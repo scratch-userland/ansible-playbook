@@ -8,7 +8,7 @@ redis_logfile: /var/log/redis/redis-server.log
 
 redis_databases: 16
 
-redis_password: RouchiP@ssw0rd
+redis_password: abcd1234
 
 # Set to an empty set to disable persistence (saving the DB to disk).
 redis_save:
