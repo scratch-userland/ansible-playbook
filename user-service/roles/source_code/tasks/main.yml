@@ -9,7 +9,7 @@
     repo=https://github.com/scratch-userland/user-service.git
     dest={{ source_dir }} version={{ git_deploy_version }} force=yes accept_hostkey=yes
 
-#- name: Change some directories owner and group
-#  file: |
-#    path={{ source_dir }}/rouchi/static state=directory recurse=yes
-#    owner=www-data group=www-data
+- name: Change some directories owner and group
+  file: |
+    path={{ source_dir }}/app/static state=directory recurse=yes
+    owner=www-data group=www-data

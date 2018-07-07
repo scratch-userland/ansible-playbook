@@ -4,5 +4,10 @@
     src=apps_nginx.conf dest=/etc/nginx/sites-enabled/{{ config_name }}.conf
     owner=root group=root
 
+- name: Create log dir
+  file: |
+    path={{ log_dir }}/nginx state=directory
+    owner=www-data group=www-data
+
 - name: Reload nginx
   service: name=nginx state=reloaded
