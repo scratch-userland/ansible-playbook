@@ -12,7 +12,7 @@ CELERY_BIN="{{ venv_dir }}/bin/celery"
 
 # App instance to use
 # comment out this line if you don't use an app
-CELERY_APP="celery_worker.celery"
+CELERY_APP="app.celery_worker.celery"
 # or fully qualified:
 #CELERY_APP="proj.tasks:app"
 
