@@ -2,7 +2,7 @@
 - name: install user-service project
   hosts: all
   user: user-service
-  sudo: yes
+  become: yes
 
   roles:
       - source_code
