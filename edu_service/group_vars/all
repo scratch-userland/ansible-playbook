@@ -1,0 +1,13 @@
+user_name: "edu_service"
+root_dir: "/home/{{ user_name }}/backend/{{ config_name }}"
+
+venv_dir: "{{ root_dir }}/venv"
+source_dir: "{{ root_dir }}/source"
+uwsgi_emperor_dir: "{{ root_dir }}/uwsgi_emperor"
+celery_dir: "{{ root_dir }}/celery"
+etc_dir: "{{ root_dir }}/etc"
+
+var_root_dir: "{{ root_dir }}/var"
+data_dir: "{{ var_root_dir }}/data"
+log_dir: "{{ var_root_dir }}/log"
+tmp_dir: "{{ var_root_dir }}/tmp"

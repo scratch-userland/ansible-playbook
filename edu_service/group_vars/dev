@@ -1,0 +1,6 @@
+---
+config_name: edu_service_dev
+git_deploy_version: dev
+uwsgi_port_edu_service: 19998
+uwsgi_env: dev
+redis_bind_interface: 127.0.0.1

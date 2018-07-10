@@ -1,0 +1,79 @@
+---
+- name: Create virtualenv
+  command: creates={{ venv_dir }} virtualenv {{ venv_dir }}
+
+- name: Install uwsgi
+  pip: virtualenv={{ venv_dir }} name=uwsgi
+
+- name: Install deps
+  pip: virtualenv={{ venv_dir }} requirements={{ source_dir }}/requirements.txt
+
+- name: Copy uwsgi init script
+  template: |
+    src=uwsgi.conf dest=/etc/init/uwsgi_{{ config_name }}.conf
+    owner=root group=root
+
+- name: Create uwsgi emperor directory
+  file: |
+    path={{ uwsgi_emperor_dir }} state=directory
+    owner=www-data group=www-data
+
+- name: Create var_root_dir
+  file: |
+    path={{ var_root_dir }} state=directory
+    owner={{ user_name }} group={{ user_name }}
+
+- name: Create log_dir
+  file: |
+    path={{ log_dir }} state=directory
+    owner={{ user_name }} group={{ user_name }}
+
+- name: Create data_dir
+  file: |
+    path={{ data_dir }} state=directory
+    owner=www-data group=www-data
+
+- name: Create tmp_dir
+  file: |
+    path={{ tmp_dir }} state=directory
+    owner=www-data group=www-data
+
+- name: Copy uwsgi emperor configurations
+  template: |
+    src=uwsgi.ini dest={{ uwsgi_emperor_dir }}/uwsgi.ini
+    owner=www-data group=www-data
+
+- name: Create celery group
+  group: |
+    name=celery state=present
+
+- name: Create celery user
+  user: |
+    name=celery  group=celery
+
+- name: Create celery pid and log directory
+  file: |
+    path={{ celery_dir }} state=directory
+    owner=celery group=celery
+
+- name: Copy celeryd config
+  template: |
+    src=celeryd.conf.tml dest=/etc/default/celery-{{ config_name }}-worker
+    owner=root group=root
+
+- name: Copy cron.tml to /etc/cron.d
+  template: |
+    src=cron.tml dest=/etc/cron.d/{{ config_name }}
+    owner=root group=root
+
+- name: Copy celeryd
+  template: |
+    src=celeryd.tml dest=/etc/init.d/celery-{{ config_name }}-worker
+    owner=root group=root
+    mode="u+x,g+x,o+x"
+
+- name: Run app-server
+  service: name=uwsgi_{{ config_name }} state=restarted
+
+- name: Run celery
+  service: name=celery-{{ config_name }}-worker state=restarted

@@ -1,0 +1,12 @@
+---
+- name: install edu_service project
+  hosts: all
+  user: edu_service
+  become: yes
+
+  roles:
+      - source_code
+      - debug
+      - nginx
+      - apps
+      - redis
