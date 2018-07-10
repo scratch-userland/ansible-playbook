@@ -4,10 +4,20 @@
     path={{ root_dir }} state=directory
     owner={{ user_name }} group={{ user_name }}
 
-- name: Checkout agent source code from git
+- name: Checkout user-service source code from git
   git: |
     repo=https://github.com/scratch-userland/user-service.git
     dest={{ source_dir }} version={{ git_deploy_version }} force=yes accept_hostkey=yes
+
+- name: Checkout models_base source code from git
+  git: |
+    repo=https://github.com/scratch-userland/model_base.git
+    dest={{ source_dir }}/app/models/base version={{ git_deploy_version }} force=yes accept_hostkey=yes
+
+- name: Checkout backend_common source code from git
+  git: |
+    repo=https://github.com/scratch-userland/backend_common.git
+    dest={{ source_dir }}/app/common version={{ git_deploy_version }} force=yes accept_hostkey=yes
 
 - name: Change some directories owner and group
   file: |
